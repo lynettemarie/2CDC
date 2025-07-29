@@ -1,0 +1,58 @@
+Devices / IP addresses
+- Windows 11 (192.168.1.11)
+- Server 2016 (192.168.1.16)
+- Server 2008 (192.168.1.8)
+- Metasploitable (192.168.1.30)
+- Windows 10 (192.168.1.10)
+- KALI (Red) (192.168.1.50) <-- I believe this won't be used for qualifiers
+- RedHat (192.168.1.25)
+- IoT Device (192.168.1.100)
+- pfense (192.168.1.1) -- LAN Address
+- pfense (203.0.113.100) -- External Address
+- Firewall Test Machine Windows 8 (203.0.113.8)
+- Kali 2 Metasploit Red Team (175.45.176.50) <-- I dont think this will be used
+- Windows 7 Attack Red Team (175.45.176.7) <-- I dont think this will be used
+
+
+Windows 10 AND Windows 11 Start Up
+1. Change Admin password 
+  From the start menu, search for “Change your password,” and select that option. 
+  Click Password, then click “Change.” Enter the current password (“kingbob”). 
+  Enter the new password from the password sheet. Enter anything for the password hint. Click next, then click finish. Do not forget to check the box on the password sheet. 
+  NEW: NMAP IP addresses on network from windows 10 box
+
+2. Disable any potential users 
+  - Admin PowerShell command prompt: net user <username> /active:no ;   - GUI: Start > "Computer Management" > System Tools > Local Users and Groups > Users > select user acccount > Properties > check "Account is Disabled" > Apply and OK)
+
+3. Check inbound and outbound Firewall rules, and lock down what is not needed 
+  - Powershell: Get-NetFirewallRule -Direction <Inbound/Outbound> ; Manage with New-NetFirewallRule / Set-NetFirewallRule -DisplayName "<>" -Direction <Inbound/Outbound> -Protocol <exICMPv4> -Action Allow
+  - GUI: Open Control Panel > search for "firewall" > Windows Defender Firewall > Advanced Settings > you can see/modify inbound and outbound rules 
+  - Ports: see active (netstat -a -n) --> verify a port is blocked (telnet <hostname> <port>) = can change ports by adding inbound/outbound rules
+
+4. Disable any processes that do not need to be running
+  - Task Manager (Ctrl+Shift+Esc) lists apps running
+  - PowerShell command line: taskkill used to kill a task (/F - forces termination[ /IM - kills all instances) -- BE CAREFUL
+  - Service Manager (Windows Key+R > services.msc)
+
+
+5. Find any backdoors (netstat -anb ; Startup (startup folder / Run key, startup folder) ; sticky keys)
+
+6. View hidden files to see if there is anything suspicious, and if there is, change permissions and ownership if needed
+
+7. make sure everything is updated (if the competition allows)
+
+
+Server 2016 Start Up 
+1. Change Administrator password
+  From the start menu, search for “Change your password,” and select that option. 
+  Click “Change” under Password. Enter the current password (“!Changeme123”). 
+  Enter the new password from the password sheet. Enter anything for the password hint. Click next, then click finish. Do not forget to check the box on the password sheet. 
+
+2. Check Connectivity settings (ensure it is connected to Ethernet0 interface)
+3. Check Firework settings (ensure this is on) 
+
+
+Server 2008 Start Up
+1. Change passwords for given users 
+2. Disable suspicious user accounts 
+3. Search for possible suspicious/malicious DNS (Control panel > Network and Internet > Network and Sharing Center > click Ethernet > Properties > select IPv4 > Properties > Change DNS to 1.1.1.1 and 8.8.8.8 and click OK. 
